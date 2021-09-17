@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:quit_smoking_app/constants.dart';
+
+//WIDGETS
 import 'package:quit_smoking_app/welcome/widget/dropdown_btn.dart';
 import 'package:quit_smoking_app/welcome/widget/welcome_button.dart';
 
+//STREAMING OBJECT
+import "package:quit_smoking_app/MyAppStreamObject.dart";
+
+//STREAMING SHARED PREFERENCE
+import 'package:streaming_shared_preferences/streaming_shared_preferences.dart';
+
 class WelcomePage extends StatelessWidget {
-  const WelcomePage({Key? key}) : super(key: key);
+  final MyAppStreamObject? myAppStreamObject;
+  WelcomePage({this.myAppStreamObject});
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +63,7 @@ class WelcomePage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    WelcomeButton(),
+                    WelcomeButton(myAppStreamObject: myAppStreamObject),
                   ],
                 ),
               ),
