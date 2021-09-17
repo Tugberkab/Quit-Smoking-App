@@ -20,7 +20,6 @@ class Home extends StatelessWidget {
   final MyAppStreamObject? myAppStreamObject;
   Home({this.myAppStreamObject});
 
-
   @override
   Widget build(BuildContext context) {
     if(myAppStreamObject != null){

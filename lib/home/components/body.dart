@@ -1,8 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+
+//MODELS
+import 'package:quit_smoking_app/models/time.dart';
+
+//WIDGETS
 import 'package:quit_smoking_app/home/widget/data_card.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 //STREAMING OBJECT
 import "package:quit_smoking_app/MyAppStreamObject.dart";
@@ -30,7 +34,7 @@ class _BodyState extends State<Body> {
   late Duration difference;
   late DateTime registerDate;
   Map<String, int> parsedData = {};
-
+  Time timeModel = Time();
 
   // Future<DateTime> getRegisterDate()async{
   //   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -51,59 +55,47 @@ class _BodyState extends State<Body> {
             //print(difference.toString());
 
             setState(() {
-              parsedData = parseDate(difference);
+              timeModel = Time.fromDuration(difference);
             });
           });
 
-
-          return Padding(
-            padding: EdgeInsets.all(15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                    "${parsedData['years'] ?? 0} YEARS"
-                ),
-                Text(
-                    "${parsedData['months'] ?? 0} MONTHS"
-                ),
-                Text(
-                    "${parsedData['weeks'] ?? 0} WEEKS"
-                ),
-                Text(
-                    "${parsedData['days'] ?? 0} DAYS"
-                ),
-                Text(
-                    "${parsedData['hours'] ?? 0} HOURS"
-                ),
-                Text(
-                    "${parsedData['minutes'] ?? 0} MINUTES"
-                ),
-                Text(
-                    "${parsedData['seconds'] ?? 0} SECONDS"
-                ),
-
-                Expanded(
-                  child: GridView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      mainAxisSpacing: 50,
-                      crossAxisSpacing: 20,
-                      crossAxisCount: 2,
-                      childAspectRatio: 1.5,
-                    ),
-                    itemCount: 4,
-                    itemBuilder: (BuildContext context, int index) => DataCard(),
+          return ListView(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                      "${timeModel.years} YEARS"
                   ),
-                ),
-                Text('Bilgiler'),
-                Container(
-                  height: 100,
-                  width: 100,
-                  color: Colors.red,
-                )
-              ],
-            ),
+                  Text(
+                      "${timeModel.months} MONTHS"
+                  ),
+                  Text(
+                      "${timeModel.weeks} WEEKS"
+                  ),
+                  Text(
+                      "${timeModel.days} DAYS"
+                  ),
+                  Text(
+                      "${timeModel.hours} HOURS"
+                  ),
+                  Text(
+                      "${timeModel.minutes} MINUTES"
+                  ),
+                  Text(
+                      "${timeModel.seconds} SECONDS"
+                  ),
+
+
+                  Text('Bilgiler'),
+                  Container(
+                    height: 100,
+                    width: 100,
+                    color: Colors.red,
+                  )
+                ],
+              ),
+            ],
           );
         });
   }
