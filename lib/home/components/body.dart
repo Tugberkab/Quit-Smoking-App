@@ -6,6 +6,7 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    NeverScrollableScrollPhysics physics = NeverScrollableScrollPhysics();
     return Padding(
       padding: EdgeInsets.all(15),
       child: Column(
@@ -13,6 +14,7 @@ class Body extends StatelessWidget {
         children: [
           Expanded(
             child: GridView.builder(
+              physics: physics,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 mainAxisSpacing: 50,
                 crossAxisSpacing: 20,
@@ -23,7 +25,20 @@ class Body extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) => DataCard(),
             ),
           ),
-          Text('Bilgiler'),
+          Divider(thickness: 2),
+          Expanded(
+            child: Column(
+              children: [
+                Text('Bilgiler'),
+                Text('Bilgiler'),
+                Text('Bilgiler'),
+                Text('Bilgiler'),
+                Text('Bilgiler'),
+                Text('Bilgiler'),
+                Text('Bilgiler'),
+              ],
+            ),
+          )
         ],
       ),
     );
