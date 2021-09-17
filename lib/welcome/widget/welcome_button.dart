@@ -1,11 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:quit_smoking_app/constants.dart';
 import 'package:quit_smoking_app/home/home.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+//STREAMING OBJECT
+import "package:quit_smoking_app/MyAppStreamObject.dart";
+
+//STREAMING SHARED PREFERENCE
+import 'package:streaming_shared_preferences/streaming_shared_preferences.dart';
+
 
 class WelcomeButton extends StatelessWidget {
-  const WelcomeButton({
-    Key? key,
-  }) : super(key: key);
+  final MyAppStreamObject? myAppStreamObject;
+  WelcomeButton({this.myAppStreamObject});
+
+
+  setRegisterDate()async{
+    DateTime now = DateTime.now();
+    this.myAppStreamObject?.registerDate.setValue(now.toString());
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +45,10 @@ class WelcomeButton extends StatelessWidget {
         style: ButtonStyle(
           overlayColor: MaterialStateProperty.all(Colors.transparent),
         ),
-        onPressed: () {
+        onPressed: () async{
+          await setRegisterDate();
           Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => Home()));
+              .push(MaterialPageRoute(builder: (context) => Home(myAppStreamObject: myAppStreamObject)));
         },
         child: Text(
           'hadi başlayalım!'.toUpperCase(),
