@@ -3,7 +3,6 @@ class Time{
   //members
   int years;
   int months;
-  int weeks ;
   int days ;
   int hours ;
   int minutes ;
@@ -18,16 +17,14 @@ class Time{
 
     int years = totalSeconds ~/ (365*24*60*60);
     int months = (totalSeconds - years*(365*24*60*60)) ~/ (30*24*60*60);
-    int weeks = (totalSeconds - years*(365*24*60*60) - months*(30*24*60*60) ) ~/ (7*24*60*60);
-    int days = (totalSeconds -years*(365*24*60*60) - months*(30*24*60*60) - weeks*(7*24*60*60)) ~/ (24*60*60);
-    int hours = (totalSeconds -years*(365*24*60*60) - months*(30*24*60*60) - weeks*(7*24*60*60) - days*(24*60*60)) ~/ (60*60);
-    int minutes = (totalSeconds -years*(365*24*60*60) - months*(30*24*60*60) - weeks*(7*24*60*60) - days*(24*60*60) - hours*(60*60)) ~/ 60;
-    int seconds = (totalSeconds -years*(365*24*60*60) - months*(30*24*60*60) - weeks*(7*24*60*60) - days*(24*60*60) - hours*(60*60) - minutes*60);
+    int days = (totalSeconds -years*(365*24*60*60) - months*(30*24*60*60)) ~/ (24*60*60);
+    int hours = (totalSeconds -years*(365*24*60*60) - months*(30*24*60*60) - days*(24*60*60)) ~/ (60*60);
+    int minutes = (totalSeconds -years*(365*24*60*60) - months*(30*24*60*60) - days*(24*60*60) - hours*(60*60)) ~/ 60;
+    int seconds = (totalSeconds -years*(365*24*60*60) - months*(30*24*60*60) - days*(24*60*60) - hours*(60*60) - minutes*60);
 
 
     data["years"] = years;
     data["months"] = months;
-    data["weeks"] = weeks;
     data["days"] = days;
     data["hours"] = hours;
     data["minutes"] = minutes;
@@ -37,15 +34,14 @@ class Time{
   }
 
   Time()
-      : years=0, months=0, weeks=0, days=0, hours=0, minutes=0, seconds=0;
+      : years=0, months=0, days=0, hours=0, minutes=0, seconds=0;
 
   //CONSTRUCTOR
-  Time.fromDuration(Duration duration) : years=0, months=0, weeks=0, days=0, hours=0, minutes=0, seconds=0
+  Time.fromDuration(Duration duration) : years=0, months=0, days=0, hours=0, minutes=0, seconds=0
   {
     Map data = parseDate(duration);
     years = data["years"] ;
     months = data["months"] ;
-    weeks = data["weeks"] ;
     days = data["days"] ;
     hours = data["hours"] ;
     minutes = data["minutes"] ;

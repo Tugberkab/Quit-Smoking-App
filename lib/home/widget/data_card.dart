@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:quit_smoking_app/constants.dart';
+import 'package:quit_smoking_app/models/earnings.dart';
 
 class DataCard extends StatelessWidget {
-  const DataCard({Key? key}) : super(key: key);
+  final Earnings? earnings;
+  const DataCard({Key? key, this.earnings}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +23,32 @@ class DataCard extends StatelessWidget {
               child: Transform.rotate(
                 angle: 155,
                 child: Container(
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        offset: Offset(1, -2),
+                        color: Colors.black,
+                        blurRadius: 2,
+                      )
+                    ],
+                    color: Colors.black,
+                  ),
                   height: 2,
                   width: double.infinity,
-                  color: Colors.black,
                 ),
               ),
             ),
           ),
+          Positioned(
+            top: 70,
+            left: 10,
+            child: Text(
+              earnings!.name!,
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          )
         ],
       ),
     );
