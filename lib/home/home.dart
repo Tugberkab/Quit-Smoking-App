@@ -6,6 +6,11 @@ import 'package:quit_smoking_app/home/components/body.dart';
 import 'package:quit_smoking_app/home/widget/custom_shape.dart';
 //STREAMING OBJECT
 import "package:quit_smoking_app/MyAppStreamObject.dart";
+import 'package:quit_smoking_app/home/widget/data_card.dart';
+import 'package:quit_smoking_app/home/widget/info_card.dart';
+import 'package:quit_smoking_app/models/earnings.dart';
+import 'package:quit_smoking_app/models/info.dart';
+import 'package:snapping_sheet/snapping_sheet.dart';
 //STREAMING SHARED PREFERENCE
 import 'package:streaming_shared_preferences/streaming_shared_preferences.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,7 +24,109 @@ class Home extends StatelessWidget {
     if (myAppStreamObject != null) {
       return Scaffold(
         appBar: buildCustomAppBar(context, myAppStreamObject),
-        body: Body(myAppStreamObject: myAppStreamObject),
+        body: SnappingSheet(
+          lockOverflowDrag: true,
+          grabbingHeight: 60,
+          grabbing: Padding(
+            padding: EdgeInsets.only(top: 10),
+            child: Container(
+              clipBehavior: Clip.antiAlias,
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    offset: Offset(-5, -5),
+                    color: Colors.black45,
+                    spreadRadius: 3,
+                    blurRadius: 7,
+                  ),
+                ],
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30),
+                  topRight: Radius.circular(30),
+                ),
+              ),
+              child: Padding(
+                padding: EdgeInsets.all(10),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 3,
+                      width: 50,
+                      decoration: BoxDecoration(
+                        color: Colors.black45,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    Text(
+                      'Bilgiler',
+                      style: TextStyle(fontSize: 15),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+          sheetAbove: SnappingSheetContent(
+            draggable: false,
+            sizeBehavior: SheetSizeFill(),
+            child: Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: GridView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    mainAxisSpacing: 50,
+                    crossAxisSpacing: 20,
+                    crossAxisCount: 2,
+                    childAspectRatio: 1.5,
+                  ),
+                  itemCount: earnings.length,
+                  itemBuilder: (BuildContext context, int index) => DataCard(
+                    earnings: earnings[index],
+                  ),
+                ),
+              ),
+            ),
+          ),
+          sheetBelow: SnappingSheetContent(
+            draggable: true,
+            sizeBehavior: SheetSizeStatic(size: 250),
+            child: ListView.builder(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              itemCount: info.length,
+              itemBuilder: (BuildContext context, int index) => Padding(
+                padding: const EdgeInsets.all(5),
+                child: InfoCard(
+                  info: info[index],
+                ),
+              ),
+            ),
+          ),
+          snappingPositions: [
+            SnappingPosition.factor(
+              positionFactor: 0.0,
+              snappingCurve: Curves.easeOutExpo,
+              snappingDuration: Duration(seconds: 1),
+              grabbingContentOffset: GrabbingContentOffset.top,
+            ),
+            SnappingPosition.pixels(
+              positionPixels: 300,
+              snappingCurve: Curves.elasticOut,
+              snappingDuration: Duration(milliseconds: 1750),
+            ),
+            SnappingPosition.factor(
+              positionFactor: 0.80,
+              snappingCurve: Curves.bounceOut,
+              snappingDuration: Duration(seconds: 1),
+              grabbingContentOffset: GrabbingContentOffset.bottom,
+            ),
+          ],
+          child: Body(myAppStreamObject: myAppStreamObject),
+        ),
       );
     } else {
       return Text("error");

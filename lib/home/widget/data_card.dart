@@ -14,10 +14,26 @@ class DataCard extends StatelessWidget {
       child: Stack(
         children: [
           Container(
+            margin: EdgeInsets.all(5),
+            clipBehavior: Clip.antiAlias,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
               color: secondaryColor,
               gradient: gradientLR,
+              boxShadow: [
+                BoxShadow(
+                  offset: Offset(-1, 2),
+                  color: Colors.black45,
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                ),
+                BoxShadow(
+                  offset: Offset(1, -2),
+                  color: Colors.black45,
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                ),
+              ],
             ),
             child: Align(
               child: Transform.rotate(
