@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quit_smoking_app/constants.dart';
-//COMPONENTS
 import 'package:quit_smoking_app/home/components/body.dart';
-//WIDGETS
 import 'package:quit_smoking_app/home/widget/custom_shape.dart';
-//STREAMING OBJECT
 import "package:quit_smoking_app/MyAppStreamObject.dart";
+import 'package:quit_smoking_app/home/widget/data_card.dart';
+import 'package:quit_smoking_app/home/widget/info_card.dart';
+import 'package:quit_smoking_app/home/widget/time_card.dart';
+import 'package:quit_smoking_app/models/earnings.dart';
+import 'package:quit_smoking_app/models/info.dart';
+import 'package:snapping_sheet/snapping_sheet.dart';
 import 'package:quit_smoking_app/models/time.dart';
-//STREAMING SHARED PREFERENCE
 import 'package:streaming_shared_preferences/streaming_shared_preferences.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -28,7 +30,97 @@ class _HomeState extends State<Home> {
     if (widget.myAppStreamObject != null) {
       return Scaffold(
         appBar: buildCustomAppBar(context, widget.myAppStreamObject),
-        body: Body(myAppStreamObject: widget.myAppStreamObject),
+        body: SnappingSheet(
+          lockOverflowDrag: true,
+          grabbingHeight: 60,
+          grabbing: Padding(
+            padding: EdgeInsets.only(top:0),
+            child: Container(
+              clipBehavior: Clip.antiAlias,
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    offset: Offset(-5, -5),
+                    color: Colors.black45,
+                    spreadRadius: 3,
+                    blurRadius: 7,
+                  ),
+                ],
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                ),
+              ),
+              child: Padding(
+                padding: EdgeInsets.all(10),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 3,
+                      width: 50,
+                      decoration: BoxDecoration(
+                        color: Colors.black45,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    Text(
+                      'Bilgiler',
+                      style: GoogleFonts.poppins(fontSize: 20),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+
+          sheetBelow: SnappingSheetContent(
+            draggable: true,
+            sizeBehavior: SheetSizeStatic(size: 250),
+            child: Padding(
+              padding: const EdgeInsets.all(0.0),
+              child: Container(
+                color: Colors.white,
+                child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount: info.length,
+                  itemBuilder: (BuildContext context, int index) => Padding(
+                    padding: const EdgeInsets.all(5),
+                    child: InfoCard(
+                      info: info[index],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          snappingPositions: [
+            SnappingPosition.factor(
+              positionFactor: 0.0,
+              snappingCurve: Curves.easeOutExpo,
+              snappingDuration: Duration(seconds: 1),
+              grabbingContentOffset: GrabbingContentOffset.top,
+            ),
+            SnappingPosition.pixels(
+              positionPixels: MediaQuery.of(context).size.height*2/3 - 60,
+              snappingCurve: Curves.elasticOut,
+              snappingDuration: Duration(milliseconds: 1750),
+            ),
+            SnappingPosition.factor(
+              positionFactor: 0.80,
+              snappingCurve: Curves.bounceOut,
+              snappingDuration: Duration(seconds: 1),
+              grabbingContentOffset: GrabbingContentOffset.bottom,
+            ),
+          ],
+          child: Body(myAppStreamObject: widget.myAppStreamObject),
+        ),
+
+
+        //Body(myAppStreamObject: widget.myAppStreamObject),
       );
     } else {
       return Text("error");
@@ -39,38 +131,7 @@ class _HomeState extends State<Home> {
     widget.myAppStreamObject!.registerDate.setValue(DateTime.now().toString());
   }
 
-  Widget InfoContainer(String info, int value){
-    return UnconstrainedBox(
-      child: Container(
-        padding: EdgeInsets.all(5),
-        height: 75,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(10),
-              topRight: Radius.circular(10),
-              bottomLeft: Radius.circular(10),
-              bottomRight: Radius.circular(10)
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.3),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: Offset(0, 3), // changes position of shadow
-            ),
-          ],
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(value.toString(), style: GoogleFonts.poppins(color: Colors.black, fontSize: 22),),
-            Text(info,style: GoogleFonts.poppins(color: Colors.black, fontSize: 20), )
-          ],
-        )
-      ),
-    );
-  }
+
 
   AppBar buildCustomAppBar(
       BuildContext context, MyAppStreamObject? myAppStreamObject) {
@@ -116,11 +177,11 @@ class _HomeState extends State<Home> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            InfoContainer("Yıl", 0),
-                            InfoContainer("Ay", 45),
-                            InfoContainer("Gün", 25),
-                            InfoContainer("Saat", 35),
-                            InfoContainer("Dakika", 25),
+                            TimeCard("Yıl", 0),
+                            TimeCard("Ay", 45),
+                            TimeCard("Gün", 25),
+                            TimeCard("Saat", 35),
+                            TimeCard("Dakika", 25),
                             Container(
                               width: 40,
                               height: 40,
