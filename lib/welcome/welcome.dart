@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:quit_smoking_app/constants.dart';
+import 'package:number_selection/number_selection.dart';
+
+import "package:google_fonts/google_fonts.dart";
 
 //WIDGETS
 import 'package:quit_smoking_app/welcome/widget/dropdown_btn.dart';
@@ -22,14 +25,15 @@ class WelcomePage extends StatelessWidget {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-          gradient: gradientTB,
+            image: DecorationImage(
+                image: AssetImage("assets/images/bg1.jpg"),
+                fit: BoxFit.cover
+            )
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Expanded(
-              child: Image.asset('assets/images/smoke.png'),
-            ),
-            Expanded(
+            Container(
               child: Container(
                 padding: EdgeInsets.all(20),
                 decoration: BoxDecoration(
@@ -40,25 +44,41 @@ class WelcomePage extends StatelessWidget {
                   ),
                 ),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
                       welcomeText,
-                      style: TextStyle(
+                      style: GoogleFonts.poppins(
                         fontSize: 15,
                         height: 1.3,
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    Column(
                       children: [
                         Text(
                           'Tükettiğiniz sigara paketi sayısı',
+                          style: GoogleFonts.poppins(
+                            fontSize: 18,
+                          ),
                         ),
-                        Expanded(
-                          child: Container(
-                            padding: EdgeInsets.only(left: 50),
-                            child: DropDownBtn(),
+                        Container(
+                          width: 120,
+                          height: 60,
+                          child: NumberSelection(
+                            theme: NumberSelectionTheme(
+                                draggableCircleColor: Colors.grey,
+                                iconsColor: Colors.white,
+                                numberColor: Colors.white,
+                                backgroundColor: Colors.deepPurpleAccent,
+                                outOfConstraintsColor: Colors.red),
+                            initialValue: 1,
+                            minValue: 1,
+                            maxValue: 10,
+                            direction: Axis.horizontal,
+                            withSpring: true,
+                            onChanged: (int value) => print("value: $value"),
+                            enableOnOutOfConstraintsAnimation: true,
+                            onOutOfConstraints: () => print("This value is too high or too low"),
                           ),
                         ),
                       ],

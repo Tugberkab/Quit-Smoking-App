@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quit_smoking_app/constants.dart';
 import 'package:quit_smoking_app/home/home.dart';
+import "package:google_fonts/google_fonts.dart";
 import 'package:shared_preferences/shared_preferences.dart';
 
 //STREAMING OBJECT
@@ -28,18 +29,14 @@ class WelcomeButton extends StatelessWidget {
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: secondaryColor,
-            blurRadius: 2,
-            offset: Offset(-1, 2),
-          ),
-          BoxShadow(
-            color: secondaryColor,
-            blurRadius: 2,
-            offset: Offset(1, -2),
+            color: Colors.black.withOpacity(0.3),
+            spreadRadius: 4,
+            blurRadius: 9,
+            offset: Offset(0, 3), // changes position of shadow
           ),
         ],
         borderRadius: BorderRadius.circular(20),
-        color: secondaryColor,
+        color: Colors.deepPurpleAccent,
       ),
       child: TextButton(
         style: ButtonStyle(
@@ -52,7 +49,7 @@ class WelcomeButton extends StatelessWidget {
         },
         child: Text(
           'hadi başlayalım!'.toUpperCase(),
-          style: TextStyle(
+          style: GoogleFonts.poppins(
             color: Colors.white,
           ),
         ),

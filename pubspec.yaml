@@ -33,6 +33,7 @@ dependencies:
   google_fonts: ^2.1.0
   snapping_sheet: ^3.1.0
   percent_indicator: ^3.0.1
+  number_selection: ^1.0.0
 
 dev_dependencies:
   flutter_test:
