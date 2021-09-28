@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quit_smoking_app/models/info.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 class InfoCard extends StatelessWidget {
   final Info? info;
@@ -19,17 +20,10 @@ class InfoCard extends StatelessWidget {
           Text(
             info!.text!,
           ),
-          Container(
-            height: 30,
-            width: 150,
-            decoration: BoxDecoration(
-              color: Colors.blue,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Align(
-              alignment: Alignment.center,
-              child: Text('%${info!.increase!} tamamlandı.'),
-            ),
+          LinearPercentIndicator(
+            width: MediaQuery.of(context).size.width - 20,
+            lineHeight: 30,
+            //percent: info!.increase!,
           ),
         ],
       ),

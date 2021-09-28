@@ -4,15 +4,12 @@ import 'package:quit_smoking_app/constants.dart';
 import 'package:quit_smoking_app/home/components/body.dart';
 import 'package:quit_smoking_app/home/widget/custom_shape.dart';
 import "package:quit_smoking_app/MyAppStreamObject.dart";
-import 'package:quit_smoking_app/home/widget/data_card.dart';
 import 'package:quit_smoking_app/home/widget/info_card.dart';
 import 'package:quit_smoking_app/home/widget/time_card.dart';
-import 'package:quit_smoking_app/models/earnings.dart';
 import 'package:quit_smoking_app/models/info.dart';
 import 'package:snapping_sheet/snapping_sheet.dart';
 import 'package:quit_smoking_app/models/time.dart';
 import 'package:streaming_shared_preferences/streaming_shared_preferences.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulWidget {
   final MyAppStreamObject? myAppStreamObject;
@@ -34,7 +31,7 @@ class _HomeState extends State<Home> {
           lockOverflowDrag: true,
           grabbingHeight: 60,
           grabbing: Padding(
-            padding: EdgeInsets.only(top:0),
+            padding: EdgeInsets.only(top: 0),
             child: Container(
               clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
@@ -75,7 +72,6 @@ class _HomeState extends State<Home> {
               ),
             ),
           ),
-
           sheetBelow: SnappingSheetContent(
             draggable: true,
             sizeBehavior: SheetSizeStatic(size: 250),
@@ -105,7 +101,7 @@ class _HomeState extends State<Home> {
               grabbingContentOffset: GrabbingContentOffset.top,
             ),
             SnappingPosition.pixels(
-              positionPixels: MediaQuery.of(context).size.height*2/3 - 60,
+              positionPixels: MediaQuery.of(context).size.height * 2 / 3 - 60,
               snappingCurve: Curves.elasticOut,
               snappingDuration: Duration(milliseconds: 1750),
             ),
@@ -119,7 +115,6 @@ class _HomeState extends State<Home> {
           child: Body(myAppStreamObject: widget.myAppStreamObject),
         ),
 
-
         //Body(myAppStreamObject: widget.myAppStreamObject),
       );
     } else {
@@ -131,8 +126,6 @@ class _HomeState extends State<Home> {
     widget.myAppStreamObject!.registerDate.setValue(DateTime.now().toString());
   }
 
-
-
   AppBar buildCustomAppBar(
       BuildContext context, MyAppStreamObject? myAppStreamObject) {
     return AppBar(
@@ -143,18 +136,13 @@ class _HomeState extends State<Home> {
       flexibleSpace: ClipPath(
         clipper: CustomShape(),
         child: Container(
-          padding: EdgeInsets.fromLTRB(15, 40, 15, 15),
           width: MediaQuery.of(context).size.width,
           color: primaryColor,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  buildIconButton(),
-                ],
-              ),
-              PreferenceBuilder(
+              SafeArea(
+                child: PreferenceBuilder(
                   preference: myAppStreamObject!.registerDate,
                   builder: (context, String value) {
                     String registerDate = value;
@@ -163,7 +151,8 @@ class _HomeState extends State<Home> {
                       children: [
                         Text(
                           "SİGARASIZ GEÇEN",
-                          style: GoogleFonts.poppins(color: Colors.white, fontSize: 30),
+                          style: GoogleFonts.poppins(
+                              color: Colors.white, fontSize: 30),
                         ),
                         // Row(
                         //   mainAxisAlignment: MainAxisAlignment.center,
@@ -193,14 +182,17 @@ class _HomeState extends State<Home> {
                                     color: Colors.black.withOpacity(0.3),
                                     spreadRadius: 5,
                                     blurRadius: 7,
-                                    offset: Offset(0, 3), // changes position of shadow
+                                    offset: Offset(
+                                        0, 3), // changes position of shadow
                                   ),
                                 ],
-
                               ),
-                              child: Center(child: Text("57",style: GoogleFonts.poppins(color: Colors.black, fontSize: 20)),),
+                              child: Center(
+                                child: Text("57",
+                                    style: GoogleFonts.poppins(
+                                        color: Colors.black, fontSize: 20)),
+                              ),
                             ),
-
                           ],
                         ),
                         // Row(
@@ -221,10 +213,12 @@ class _HomeState extends State<Home> {
                         //     Text("${timeModel.seconds} SECONDS"),
                         //   ],
                         // ),
-
                       ],
                     );
-                  }),
+                  },
+                ),
+              ),
+              buildIconButton(),
             ],
           ),
         ),

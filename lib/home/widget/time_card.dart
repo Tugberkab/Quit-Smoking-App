@@ -14,12 +14,7 @@ class TimeCard extends StatelessWidget {
           height: 75,
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(10),
-                topRight: Radius.circular(10),
-                bottomLeft: Radius.circular(10),
-                bottomRight: Radius.circular(10)
-            ),
+            borderRadius: BorderRadius.circular(10),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.3),
@@ -32,11 +27,16 @@ class TimeCard extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(value!.toString(), style: GoogleFonts.poppins(color: Colors.black, fontSize: 22),),
-              Text(info!,style: GoogleFonts.poppins(color: Colors.black, fontSize: 20), )
+              Text(
+                value!.toString(),
+                style: GoogleFonts.poppins(color: Colors.black, fontSize: 22),
+              ),
+              Text(
+                info!,
+                style: GoogleFonts.poppins(color: Colors.black, fontSize: 20),
+              )
             ],
-          )
-      ),
+          )),
     );
   }
 }
