@@ -4,10 +4,10 @@ import 'package:quit_smoking_app/models/earnings.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quit_smoking_app/models/time.dart';
 
-class DataCard extends StatelessWidget {
+class EarningsCard extends StatelessWidget {
   final Time? time;
   final Earnings? earnings;
-  const DataCard({Key? key, this.earnings, this.time}) : super(key: key);
+  const EarningsCard({Key? key, this.earnings, this.time}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

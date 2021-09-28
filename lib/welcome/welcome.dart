@@ -14,9 +14,6 @@ import 'package:streaming_shared_preferences/streaming_shared_preferences.dart';
 class WelcomePage extends StatelessWidget {
   final MyAppStreamObject? myAppStreamObject;
   WelcomePage({this.myAppStreamObject});
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
