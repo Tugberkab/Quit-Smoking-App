@@ -122,6 +122,57 @@ class _HomeState extends State<Home> {
     }
   }
 
+  showResetDialog(BuildContext context){
+    showDialog(context: context,
+        barrierDismissible: true,
+        builder: (BuildContext dialogContext){
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            elevation: 0,
+            backgroundColor: Colors.transparent,
+            child: Container(
+              padding: EdgeInsets.only(left: 20,top: 20, right: 20,bottom: 20
+              ),
+              margin: EdgeInsets.only(top: 45),
+              decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(color: Colors.black,offset: Offset(0,10),
+                        blurRadius: 10
+                    ),
+                  ]
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Text("RESET DATE?",style: GoogleFonts.poppins(color:Colors.black,fontSize: 22,fontWeight: FontWeight.w600),),
+                  SizedBox(height: 15,),
+                  TextButton(
+                    onPressed: (){
+                      resetDate();
+                    },
+                    child: Text("Reset",style: GoogleFonts.poppins(color:Colors.red[700],fontSize: 18),textAlign: TextAlign.center,)
+                  ),
+                  SizedBox(height: 12,),
+                  TextButton(
+                    onPressed: (){
+                      Navigator.pop(context);
+                    },
+                    child: Text("Cancel",style: GoogleFonts.poppins(color:Colors.black,fontSize: 18),textAlign: TextAlign.center,)
+                  ),
+                ],
+              ),
+            ),
+          );
+
+        }
+    );
+  }
+
   Future<void> resetDate() async {
     widget.myAppStreamObject!.registerDate.setValue(DateTime.now().toString());
   }
@@ -145,7 +196,7 @@ class _HomeState extends State<Home> {
                 child: PreferenceBuilder(
                   preference: myAppStreamObject!.registerDate,
                   builder: (context, String value) {
-                    String registerDate = value;
+                    String registerDate = value.substring(0,value.lastIndexOf(" "));
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -213,11 +264,14 @@ class _HomeState extends State<Home> {
                         //     Text("${timeModel.seconds} SECONDS"),
                         //   ],
                         // ),
+                        SizedBox(height: 15),
+                        Text("Başlangıç: " + registerDate, style: GoogleFonts.poppins(fontSize: 16,color: Colors.white),)
                       ],
                     );
                   },
                 ),
               ),
+
               buildIconButton(),
             ],
           ),
@@ -228,9 +282,8 @@ class _HomeState extends State<Home> {
 
   Container buildIconButton() {
     return Container(
-      padding: EdgeInsets.all(0),
-      height: 45,
-      width: 45,
+      height: MediaQuery.of(context).size.width/8,
+      width: MediaQuery.of(context).size.width/8,
       decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: Colors.white,
@@ -246,12 +299,13 @@ class _HomeState extends State<Home> {
         splashRadius: 1,
         splashColor: Colors.blue,
         onPressed: () async {
-          await resetDate();
+          showResetDialog(context);
+          //await resetDate();
         },
         icon: Icon(
           Icons.restore,
           color: Colors.grey[700],
-          size: 30,
+          size: MediaQuery.of(context).size.width/12,
         ),
       ),
     );
