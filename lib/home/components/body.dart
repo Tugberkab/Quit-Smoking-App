@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:snapping_sheet/snapping_sheet.dart';
 import 'package:flutter/material.dart';
-import 'package:quit_smoking_app/home/widget/data_card.dart';
+import 'package:quit_smoking_app/home/widget/earnings_card.dart';
 import 'package:quit_smoking_app/home/widget/info_card.dart';
 import 'package:quit_smoking_app/models/earnings.dart';
 import 'package:quit_smoking_app/models/time.dart';
@@ -46,9 +46,8 @@ class _BodyState extends State<Body> {
       builder: (context, String value) {
         registerDate = DateTime.parse(value);
 
-        
         // BURASI COMMENTLI KALSIN
-        
+
         // timer = Timer.periodic(Duration(seconds: 1), (timer) {
         //   now = DateTime.now();
         //   difference = now.difference(registerDate);
@@ -62,7 +61,6 @@ class _BodyState extends State<Body> {
         return Container(
           padding: EdgeInsets.all(12),
           color: Colors.white,
-
           child: Expanded(
             child: GridView.builder(
               physics: NeverScrollableScrollPhysics(),
@@ -73,16 +71,12 @@ class _BodyState extends State<Body> {
                 childAspectRatio: 1.5,
               ),
               itemCount: earnings.length,
-              itemBuilder: (BuildContext context, int index) => DataCard(
+              itemBuilder: (BuildContext context, int index) => EarningsCard(
                 earnings: earnings[index],
               ),
             ),
           ),
-
         );
-
-
-
       },
     );
   }

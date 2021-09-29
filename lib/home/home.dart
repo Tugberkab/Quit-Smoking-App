@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:quit_smoking_app/constants.dart';
 import 'package:quit_smoking_app/home/components/body.dart';
 import 'package:quit_smoking_app/home/widget/custom_shape.dart';
@@ -72,7 +71,7 @@ class _HomeState extends State<Home> {
                     ),
                     Text(
                       'Bilgiler',
-                      style: GoogleFonts.poppins(fontSize: 20),
+                      style: TextStyle(fontSize: 20),
                     )
                   ],
                 ),
@@ -158,21 +157,29 @@ class _HomeState extends State<Home> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  Text("RESET DATE?",style: GoogleFonts.poppins(color:Colors.black,fontSize: 22,fontWeight: FontWeight.w600),),
-                  SizedBox(height: 15,),
+                  Text(
+                    "RESET DATE?",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 22,
+                        fontWeight: FontWeight.w600),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
                   TextButton(
                     onPressed: (){
                       resetDate();
                       Navigator.pop(context);
                     },
-                    child: Text("Reset",style: GoogleFonts.poppins(color:Colors.red[700],fontSize: 18),textAlign: TextAlign.center,)
+                    child: Text("Reset",style: TextStyle(color:Colors.red[700],fontSize: 18),textAlign: TextAlign.center,)
                   ),
                   SizedBox(height: 12,),
                   TextButton(
                     onPressed: (){
                       Navigator.pop(context);
                     },
-                    child: Text("Cancel",style: GoogleFonts.poppins(color:Colors.black,fontSize: 18),textAlign: TextAlign.center,)
+                    child: Text("Cancel",style: TextStyle(color:Colors.black,fontSize: 18),textAlign: TextAlign.center,)
                   ),
                 ],
               ),
@@ -197,8 +204,8 @@ class _HomeState extends State<Home> {
       flexibleSpace: ClipPath(
         clipper: CustomShape(),
         child: Container(
-          width: MediaQuery.of(context).size.width,
-          color: primaryColor,
+          clipBehavior: Clip.antiAlias,
+          decoration: BoxDecoration(color: primaryColor),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -232,15 +239,14 @@ class _HomeState extends State<Home> {
                       children: [
                         Text(
                           "SİGARASIZ GEÇEN",
-                          style: GoogleFonts.poppins(
-                              color: Colors.white, fontSize: 30),
+                          style: TextStyle(color: Colors.white, fontSize: 25),
                         ),
                         // Row(
                         //   mainAxisAlignment: MainAxisAlignment.center,
                         //   children: [
-                        //     Text("${timeModel.days}", style: GoogleFonts.poppins(fontSize: 55, color: Colors.white),),
+                        //     Text("${timeModel.days}", style: TextStyle(fontSize: 55, color: Colors.white),),
                         //     SizedBox(width: 15,),
-                        //     Text("GÜN", style: GoogleFonts.poppins(fontSize: 30, color: Colors.white),)
+                        //     Text("GÜN", style: TextStyle(fontSize: 30, color: Colors.white),)
                         //   ],
                         // ),
 
@@ -271,7 +277,7 @@ class _HomeState extends State<Home> {
                               child: Center(
                                 child: Text(
                                     "00",
-                                    style: GoogleFonts.poppins(
+                                    style: TextStyle(
                                     color: Colors.black, fontSize: 20)
                                 ),
                               ),
@@ -297,7 +303,7 @@ class _HomeState extends State<Home> {
                         //   ],
                         // ),
                         SizedBox(height: 15),
-                        Text("Başlangıç: " + registerDate.toString(), style: GoogleFonts.poppins(fontSize: 16,color: Colors.white),)
+                        Text("Başlangıç: " + registerDate.toString(), style: TextStyle(fontSize: 16,color: Colors.white),)
                       ],
                     );
                   },
@@ -314,8 +320,8 @@ class _HomeState extends State<Home> {
 
   Container buildIconButton() {
     return Container(
-      height: MediaQuery.of(context).size.width/8,
-      width: MediaQuery.of(context).size.width/8,
+      height: MediaQuery.of(context).size.width / 8,
+      width: MediaQuery.of(context).size.width / 8,
       decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: Colors.white,
@@ -337,7 +343,7 @@ class _HomeState extends State<Home> {
         icon: Icon(
           Icons.restore,
           color: Colors.grey[700],
-          size: MediaQuery.of(context).size.width/12,
+          size: MediaQuery.of(context).size.width / 12,
         ),
       ),
     );

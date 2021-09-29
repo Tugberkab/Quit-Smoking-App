@@ -13,5 +13,4 @@ const gradientLR = LinearGradient(
   end: Alignment.centerRight,
 );
 
-const welcomeText =
-    'Tebrikler! Sigarayı bırakma adına büyük bir adım atmış bulunmaktasınız. Bu uygulama sayesinde sigarı bırakma anından itibaren size sunduğumuz dataları görebilirsiniz.';
+const welcomeText = 'Sigarayı bırakmaya hazır mısın?';

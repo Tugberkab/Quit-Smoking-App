@@ -27,7 +27,7 @@ List<Earnings> earnings = [
   ),
   Earnings(
     id: 4,
-    name: 'Bulamadım',
+    name: 'Kazanılan\nZaman',
     increase: 5,
   ),
 ];

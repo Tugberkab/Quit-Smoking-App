@@ -10,7 +10,6 @@ import "package:quit_smoking_app/MyAppStreamObject.dart";
 //STREAMING SHARED PREFERENCE
 import 'package:streaming_shared_preferences/streaming_shared_preferences.dart';
 
-
 class WelcomeButton extends StatelessWidget {
   final MyAppStreamObject? myAppStreamObject;
   final int? paket;
@@ -21,7 +20,6 @@ class WelcomeButton extends StatelessWidget {
     DateTime now = DateTime.now();
     this.myAppStreamObject?.registerDate.setValue(now.toString());
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +35,7 @@ class WelcomeButton extends StatelessWidget {
           ),
         ],
         borderRadius: BorderRadius.circular(20),
-        color: Colors.deepPurpleAccent,
+        color: Color(0xff5f225d),
       ),
       child: TextButton(
         style: ButtonStyle(
@@ -50,7 +48,8 @@ class WelcomeButton extends StatelessWidget {
         },
         child: Text(
           'hadi başlayalım!'.toUpperCase(),
-          style: GoogleFonts.poppins(
+          style: TextStyle(
+            fontSize: MediaQuery.of(context).size.width/25,
             color: Colors.white,
           ),
         ),

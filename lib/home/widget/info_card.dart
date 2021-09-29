@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:quit_smoking_app/constants.dart';
 import 'package:quit_smoking_app/models/info.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:quit_smoking_app/models/time.dart';
 
 class InfoCard extends StatelessWidget {
   final Info? info;
@@ -50,11 +48,8 @@ class InfoCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            info!.text!,
-            style: GoogleFonts.poppins(),
-          ),
-          SizedBox(height: MediaQuery.of(context).size.height / 80),
+          Text(info!.text!),
+          SizedBox(height: MediaQuery.of(context).size.height / 40),
           LinearPercentIndicator(
             progressColor: secondaryColor,
             animationDuration: 2000,
