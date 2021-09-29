@@ -5,7 +5,6 @@ import 'package:number_selection/number_selection.dart';
 import "package:google_fonts/google_fonts.dart";
 
 //WIDGETS
-import 'package:quit_smoking_app/welcome/widget/dropdown_btn.dart';
 import 'package:quit_smoking_app/welcome/widget/welcome_button.dart';
 
 //STREAMING OBJECT
@@ -48,7 +47,7 @@ class WelcomePage extends StatelessWidget {
                 children: [
                   Text(
                     welcomeText,
-                    style: GoogleFonts.poppins(
+                    style: TextStyle(
                       fontSize: 17,
                       height: 1.3,
                     ),
@@ -56,7 +55,7 @@ class WelcomePage extends StatelessWidget {
                   SizedBox(height: 10),
                   Text(
                     'Tükettiğin sigara paketi sayısı',
-                    style: GoogleFonts.poppins(
+                    style: TextStyle(
                       fontSize: 15,
                     ),
                   ),

@@ -47,7 +47,7 @@ class WelcomeButton extends StatelessWidget {
         },
         child: Text(
           'hadi başlayalım!'.toUpperCase(),
-          style: GoogleFonts.poppins(
+          style: TextStyle(
             color: Colors.white,
           ),
         ),

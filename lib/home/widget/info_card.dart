@@ -19,10 +19,7 @@ class InfoCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            info!.text!,
-            style: GoogleFonts.poppins(),
-          ),
+          Text(info!.text!),
           SizedBox(height: MediaQuery.of(context).size.height / 40),
           LinearPercentIndicator(
             progressColor: secondaryColor,

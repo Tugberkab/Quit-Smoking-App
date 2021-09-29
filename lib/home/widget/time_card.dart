@@ -29,11 +29,11 @@ class TimeCard extends StatelessWidget {
             children: [
               Text(
                 value!.toString(),
-                style: GoogleFonts.poppins(color: Colors.black, fontSize: 22),
+                style: TextStyle(color: Colors.black, fontSize: 22),
               ),
               Text(
                 info!,
-                style: GoogleFonts.poppins(color: Colors.black, fontSize: 20),
+                style: TextStyle(color: Colors.black, fontSize: 20),
               )
             ],
           )),

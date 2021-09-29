@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quit_smoking_app/constants.dart';
 import 'package:quit_smoking_app/models/earnings.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:quit_smoking_app/models/time.dart';
 
 class EarningsCard extends StatelessWidget {

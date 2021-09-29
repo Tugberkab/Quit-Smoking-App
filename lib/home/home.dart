@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:quit_smoking_app/constants.dart';
 import 'package:quit_smoking_app/home/components/body.dart';
 import 'package:quit_smoking_app/home/widget/custom_shape.dart';
