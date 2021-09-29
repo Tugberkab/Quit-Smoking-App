@@ -13,7 +13,8 @@ import 'package:streaming_shared_preferences/streaming_shared_preferences.dart';
 
 class WelcomeButton extends StatelessWidget {
   final MyAppStreamObject? myAppStreamObject;
-  WelcomeButton({this.myAppStreamObject});
+  final int? paket;
+  WelcomeButton({this.myAppStreamObject, this.paket});
 
 
   setRegisterDate()async{
@@ -45,7 +46,7 @@ class WelcomeButton extends StatelessWidget {
         onPressed: () async{
           await setRegisterDate();
           Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => Home(myAppStreamObject: myAppStreamObject)));
+              .push(MaterialPageRoute(builder: (context) => Home(myAppStreamObject: myAppStreamObject, paket: paket)));
         },
         child: Text(
           'hadi başlayalım!'.toUpperCase(),

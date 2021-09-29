@@ -3,10 +3,41 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:quit_smoking_app/constants.dart';
 import 'package:quit_smoking_app/models/info.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:quit_smoking_app/models/time.dart';
 
 class InfoCard extends StatelessWidget {
   final Info? info;
-  const InfoCard({Key? key, this.info}) : super(key: key);
+  final Duration? duration;
+  final double? coefficient;
+  const InfoCard({Key? key, this.info, this.duration, this.coefficient}) : super(key: key);
+
+
+  get percentageValue{
+    return 0.0;
+    // if( (duration!./coefficient!) < 0.001 ){
+    //   return 0.0;
+    // }
+    // else if((timeModel!.minutes/coefficient!) >= 1.0){
+    //   return 1.0;
+    // }
+    // else{
+    //   return timeModel!.minutes/coefficient!;
+    // }
+  }
+
+  get percentageText{
+    late double division;
+    if(info!.timeType == "Hour"){
+      division = duration!.inHours/coefficient!;
+    }
+    else if(info!.timeType == "Day"){
+      division = duration!.inDays/coefficient!;
+    }
+    else if(info!.timeType == "Month"){
+      division = (duration!.inDays/30)/coefficient!;
+    }
+    return Text(division.toStringAsFixed(7));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,15 +54,14 @@ class InfoCard extends StatelessWidget {
             info!.text!,
             style: GoogleFonts.poppins(),
           ),
-          SizedBox(height: MediaQuery.of(context).size.height / 40),
+          SizedBox(height: MediaQuery.of(context).size.height / 80),
           LinearPercentIndicator(
             progressColor: secondaryColor,
             animationDuration: 2000,
             animation: true,
-            center: Text('%' + (info!.increase! * 100).toString()),
-            percent: info!.increase!,
+            center: percentageText,
+            percent: percentageValue,
             lineHeight: 30,
-            //percent: info!.increase!,
           ),
         ],
       ),

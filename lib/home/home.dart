@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quit_smoking_app/constants.dart';
@@ -13,7 +15,8 @@ import 'package:streaming_shared_preferences/streaming_shared_preferences.dart';
 
 class Home extends StatefulWidget {
   final MyAppStreamObject? myAppStreamObject;
-  Home({this.myAppStreamObject});
+  final int? paket;
+  Home({this.myAppStreamObject, this.paket});
 
   @override
   State<Home> createState() => _HomeState();
@@ -21,6 +24,10 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   Time timeModel = Time();
+  late Timer timer;
+  late DateTime now;
+  Duration difference = Duration();
+  late DateTime registerDate;
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +93,9 @@ class _HomeState extends State<Home> {
                   itemBuilder: (BuildContext context, int index) => Padding(
                     padding: const EdgeInsets.all(5),
                     child: InfoCard(
+                      duration: difference,
                       info: info[index],
+                      coefficient: info[index].coefficient,
                     ),
                   ),
                 ),
@@ -154,6 +163,7 @@ class _HomeState extends State<Home> {
                   TextButton(
                     onPressed: (){
                       resetDate();
+                      Navigator.pop(context);
                     },
                     child: Text("Reset",style: GoogleFonts.poppins(color:Colors.red[700],fontSize: 18),textAlign: TextAlign.center,)
                   ),
@@ -196,7 +206,27 @@ class _HomeState extends State<Home> {
                 child: PreferenceBuilder(
                   preference: myAppStreamObject!.registerDate,
                   builder: (context, String value) {
-                    String registerDate = value.substring(0,value.lastIndexOf(" "));
+
+
+                    // BURASI COMMENTLI KALSIN
+                    registerDate = DateTime.parse(value);
+
+                    timer = Timer.periodic(Duration(minutes: 1), (timer) {
+                      now = DateTime.now();
+                      difference = now.difference(registerDate);
+                      //print(difference.toString());
+
+                      setState(() {
+                        timeModel = Time.fromDuration(difference);
+                      });
+                    });
+
+
+
+
+
+
+
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -217,11 +247,11 @@ class _HomeState extends State<Home> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            TimeCard("Yıl", 0),
-                            TimeCard("Ay", 45),
-                            TimeCard("Gün", 25),
-                            TimeCard("Saat", 35),
-                            TimeCard("Dakika", 25),
+                            TimeCard("Yıl", timeModel.years),
+                            TimeCard("Ay", timeModel.months),
+                            TimeCard("Gün", timeModel.days),
+                            TimeCard("Saat", timeModel.hours),
+                            TimeCard("Dakika", timeModel.minutes),
                             Container(
                               width: 40,
                               height: 40,
@@ -239,9 +269,11 @@ class _HomeState extends State<Home> {
                                 ],
                               ),
                               child: Center(
-                                child: Text("57",
+                                child: Text(
+                                    "00",
                                     style: GoogleFonts.poppins(
-                                        color: Colors.black, fontSize: 20)),
+                                    color: Colors.black, fontSize: 20)
+                                ),
                               ),
                             ),
                           ],
@@ -265,7 +297,7 @@ class _HomeState extends State<Home> {
                         //   ],
                         // ),
                         SizedBox(height: 15),
-                        Text("Başlangıç: " + registerDate, style: GoogleFonts.poppins(fontSize: 16,color: Colors.white),)
+                        Text("Başlangıç: " + registerDate.toString(), style: GoogleFonts.poppins(fontSize: 16,color: Colors.white),)
                       ],
                     );
                   },

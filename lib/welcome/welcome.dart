@@ -5,7 +5,6 @@ import 'package:number_selection/number_selection.dart';
 import "package:google_fonts/google_fonts.dart";
 
 //WIDGETS
-import 'package:quit_smoking_app/welcome/widget/dropdown_btn.dart';
 import 'package:quit_smoking_app/welcome/widget/welcome_button.dart';
 
 //STREAMING OBJECT
@@ -14,11 +13,16 @@ import "package:quit_smoking_app/MyAppStreamObject.dart";
 //STREAMING SHARED PREFERENCE
 import 'package:streaming_shared_preferences/streaming_shared_preferences.dart';
 
-class WelcomePage extends StatelessWidget {
+class WelcomePage extends StatefulWidget {
   final MyAppStreamObject? myAppStreamObject;
   WelcomePage({this.myAppStreamObject});
 
+  @override
+  State<WelcomePage> createState() => _WelcomePageState();
+}
 
+class _WelcomePageState extends State<WelcomePage> {
+  int paket = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -76,14 +80,18 @@ class WelcomePage extends StatelessWidget {
                             maxValue: 10,
                             direction: Axis.horizontal,
                             withSpring: true,
-                            onChanged: (int value) => print("value: $value"),
+                            onChanged: (int value) {
+                              setState(() {
+                                paket = value;
+                              });
+                            },
                             enableOnOutOfConstraintsAnimation: true,
                             onOutOfConstraints: () => print("This value is too high or too low"),
                           ),
                         ),
                       ],
                     ),
-                    WelcomeButton(myAppStreamObject: myAppStreamObject),
+                    WelcomeButton(myAppStreamObject: widget.myAppStreamObject, paket: paket),
                   ],
                 ),
               ),

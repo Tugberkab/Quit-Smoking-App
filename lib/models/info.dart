@@ -1,47 +1,54 @@
 import 'package:quit_smoking_app/models/time.dart';
 
 class Info {
-  final Time? time;
   final int? id;
-  final double? increase;
   final String? text;
+  final String? timeType;
+  final double? coefficient;
+
   Info({
-    this.time,
     this.id,
     this.text,
-    this.increase,
+    this.timeType,
+    this.coefficient
   });
 }
 
 List<Info> info = [
   Info(
     id: 1,
-    text: '2 ila 12 hafta içinde kan dolaşımı düzelmeye başlar.',
-    increase: 0.5,
+    text: 'Kan Dolaşımında Düzelme',
+    timeType: "Hour",
+    coefficient: 12*7*24
   ),
   Info(
     id: 2,
-    text: '9 ay içerisinde öksürük ve nefes darlığı azalır.',
-    increase: 0.4,
+    text: 'Öksürük Ve Nefes Darlığında Azalma',
+    timeType: "Day",
+    coefficient: 9*30
   ),
   Info(
     id: 3,
-    text: '9 ay içerisinde Akciğer fonksiyonları yüzde 5 artar.',
-    increase: 0.3,
+    text: 'Akciğer Fonksiyonlarında Artma',
+    timeType: "Month",
+    coefficient: 9*20
   ),
   Info(
     id: 4,
-    text: '1 yıl sonra kalp krizi riski yarı yarıya azalır',
-    increase: 0.6,
+    text: 'Kalp Krizi Riskinde Azalma',
+    timeType: "Day",
+    coefficient: 2*365
   ),
   Info(
     id: 5,
-    text: '5 yıl sonra KOAH riski yarı yarıya azalır.',
-    increase: 0.7,
+    text: 'KOAH Riskinde Azalma',
+    timeType: "Month",
+    coefficient: 5*12*2
   ),
   Info(
     id: 6,
-    text: '5 yıl sonra sigara kullanmayan biri ile aynı olursunuz.',
-    increase: 0.2,
+    text: 'Sigara Kullanmayan Biri İle Aynı Olma',
+    timeType: "Day",
+    coefficient: 5*365
   )
 ];
