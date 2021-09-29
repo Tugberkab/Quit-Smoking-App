@@ -122,10 +122,11 @@ class _HomeState extends State<Home> {
     }
   }
 
-  showResetDialog(BuildContext context){
-    showDialog(context: context,
+  showResetDialog(BuildContext context) {
+    showDialog(
+        context: context,
         barrierDismissible: true,
-        builder: (BuildContext dialogContext){
+        builder: (BuildContext dialogContext) {
           return Dialog(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
@@ -133,44 +134,60 @@ class _HomeState extends State<Home> {
             elevation: 0,
             backgroundColor: Colors.transparent,
             child: Container(
-              padding: EdgeInsets.only(left: 20,top: 20, right: 20,bottom: 20
-              ),
+              padding:
+                  EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 20),
               margin: EdgeInsets.only(top: 45),
               decoration: BoxDecoration(
                   shape: BoxShape.rectangle,
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
-                    BoxShadow(color: Colors.black,offset: Offset(0,10),
-                        blurRadius: 10
-                    ),
-                  ]
-              ),
+                    BoxShadow(
+                        color: Colors.black,
+                        offset: Offset(0, 10),
+                        blurRadius: 10),
+                  ]),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  Text("RESET DATE?",style: GoogleFonts.poppins(color:Colors.black,fontSize: 22,fontWeight: FontWeight.w600),),
-                  SizedBox(height: 15,),
-                  TextButton(
-                    onPressed: (){
-                      resetDate();
-                    },
-                    child: Text("Reset",style: GoogleFonts.poppins(color:Colors.red[700],fontSize: 18),textAlign: TextAlign.center,)
+                  Text(
+                    "RESET DATE?",
+                    style: GoogleFonts.poppins(
+                        color: Colors.black,
+                        fontSize: 22,
+                        fontWeight: FontWeight.w600),
                   ),
-                  SizedBox(height: 12,),
-                  TextButton(
-                    onPressed: (){
-                      Navigator.pop(context);
-                    },
-                    child: Text("Cancel",style: GoogleFonts.poppins(color:Colors.black,fontSize: 18),textAlign: TextAlign.center,)
+                  SizedBox(
+                    height: 15,
                   ),
+                  TextButton(
+                      onPressed: () {
+                        resetDate();
+                      },
+                      child: Text(
+                        "Reset",
+                        style: GoogleFonts.poppins(
+                            color: Colors.red[700], fontSize: 18),
+                        textAlign: TextAlign.center,
+                      )),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        "Cancel",
+                        style: GoogleFonts.poppins(
+                            color: Colors.black, fontSize: 18),
+                        textAlign: TextAlign.center,
+                      )),
                 ],
               ),
             ),
           );
-
-        }
-    );
+        });
   }
 
   Future<void> resetDate() async {
@@ -196,14 +213,15 @@ class _HomeState extends State<Home> {
                 child: PreferenceBuilder(
                   preference: myAppStreamObject!.registerDate,
                   builder: (context, String value) {
-                    String registerDate = value.substring(0,value.lastIndexOf(" "));
+                    String registerDate =
+                        value.substring(0, value.lastIndexOf(" "));
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
                           "SİGARASIZ GEÇEN",
                           style: GoogleFonts.poppins(
-                              color: Colors.white, fontSize: 30),
+                              color: Colors.white, fontSize: 25),
                         ),
                         // Row(
                         //   mainAxisAlignment: MainAxisAlignment.center,
@@ -264,14 +282,16 @@ class _HomeState extends State<Home> {
                         //     Text("${timeModel.seconds} SECONDS"),
                         //   ],
                         // ),
-                        SizedBox(height: 15),
-                        Text("Başlangıç: " + registerDate, style: GoogleFonts.poppins(fontSize: 16,color: Colors.white),)
+                        Text(
+                          "Başlangıç: " + registerDate,
+                          style: GoogleFonts.poppins(
+                              fontSize: 16, color: Colors.white),
+                        )
                       ],
                     );
                   },
                 ),
               ),
-
               buildIconButton(),
             ],
           ),
@@ -282,8 +302,8 @@ class _HomeState extends State<Home> {
 
   Container buildIconButton() {
     return Container(
-      height: MediaQuery.of(context).size.width/8,
-      width: MediaQuery.of(context).size.width/8,
+      height: MediaQuery.of(context).size.width / 8,
+      width: MediaQuery.of(context).size.width / 8,
       decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: Colors.white,
@@ -305,7 +325,7 @@ class _HomeState extends State<Home> {
         icon: Icon(
           Icons.restore,
           color: Colors.grey[700],
-          size: MediaQuery.of(context).size.width/12,
+          size: MediaQuery.of(context).size.width / 12,
         ),
       ),
     );

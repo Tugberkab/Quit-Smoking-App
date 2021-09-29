@@ -11,7 +11,7 @@ class TimeCard extends StatelessWidget {
     return UnconstrainedBox(
       child: Container(
           padding: EdgeInsets.all(5),
-          height: 75,
+          height: MediaQuery.of(context).size.height / 8,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
