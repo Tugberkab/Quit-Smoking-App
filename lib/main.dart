@@ -8,11 +8,10 @@ import "package:quit_smoking_app/MyAppStreamObject.dart";
 //STREAMING SHARED PREFERENCE
 import 'package:streaming_shared_preferences/streaming_shared_preferences.dart';
 
-
-
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final StreamingSharedPreferences preferences = await StreamingSharedPreferences.instance;
+  final StreamingSharedPreferences preferences =
+      await StreamingSharedPreferences.instance;
   final streamingObject = MyAppStreamObject(preferences);
 
   runApp(MyApp(myAppStreamObject: streamingObject));
@@ -28,6 +27,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
+        fontFamily: 'Poppins',
         primarySwatch: Colors.blue,
       ),
       home: WelcomePage(myAppStreamObject: myAppStreamObject),

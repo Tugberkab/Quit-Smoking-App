@@ -65,7 +65,7 @@ class _HomeState extends State<Home> {
                     ),
                     Text(
                       'Bilgiler',
-                      style: GoogleFonts.poppins(fontSize: 20),
+                      style: TextStyle(fontSize: 20),
                     )
                   ],
                 ),
@@ -152,7 +152,7 @@ class _HomeState extends State<Home> {
                 children: <Widget>[
                   Text(
                     "RESET DATE?",
-                    style: GoogleFonts.poppins(
+                    style: TextStyle(
                         color: Colors.black,
                         fontSize: 22,
                         fontWeight: FontWeight.w600),
@@ -166,8 +166,7 @@ class _HomeState extends State<Home> {
                       },
                       child: Text(
                         "Reset",
-                        style: GoogleFonts.poppins(
-                            color: Colors.red[700], fontSize: 18),
+                        style: TextStyle(color: Colors.red[700], fontSize: 18),
                         textAlign: TextAlign.center,
                       )),
                   SizedBox(
@@ -179,8 +178,7 @@ class _HomeState extends State<Home> {
                       },
                       child: Text(
                         "Cancel",
-                        style: GoogleFonts.poppins(
-                            color: Colors.black, fontSize: 18),
+                        style: TextStyle(color: Colors.black, fontSize: 18),
                         textAlign: TextAlign.center,
                       )),
                 ],
@@ -204,8 +202,8 @@ class _HomeState extends State<Home> {
       flexibleSpace: ClipPath(
         clipper: CustomShape(),
         child: Container(
-          width: MediaQuery.of(context).size.width,
-          color: primaryColor,
+          clipBehavior: Clip.antiAlias,
+          decoration: BoxDecoration(color: primaryColor),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -220,15 +218,14 @@ class _HomeState extends State<Home> {
                       children: [
                         Text(
                           "SİGARASIZ GEÇEN",
-                          style: GoogleFonts.poppins(
-                              color: Colors.white, fontSize: 25),
+                          style: TextStyle(color: Colors.white, fontSize: 25),
                         ),
                         // Row(
                         //   mainAxisAlignment: MainAxisAlignment.center,
                         //   children: [
-                        //     Text("${timeModel.days}", style: GoogleFonts.poppins(fontSize: 55, color: Colors.white),),
+                        //     Text("${timeModel.days}", style: TextStyle(fontSize: 55, color: Colors.white),),
                         //     SizedBox(width: 15,),
-                        //     Text("GÜN", style: GoogleFonts.poppins(fontSize: 30, color: Colors.white),)
+                        //     Text("GÜN", style: TextStyle(fontSize: 30, color: Colors.white),)
                         //   ],
                         // ),
 
@@ -258,7 +255,7 @@ class _HomeState extends State<Home> {
                               ),
                               child: Center(
                                 child: Text("57",
-                                    style: GoogleFonts.poppins(
+                                    style: TextStyle(
                                         color: Colors.black, fontSize: 20)),
                               ),
                             ),
@@ -282,10 +279,10 @@ class _HomeState extends State<Home> {
                         //     Text("${timeModel.seconds} SECONDS"),
                         //   ],
                         // ),
+                        SizedBox(height: 10),
                         Text(
                           "Başlangıç: " + registerDate,
-                          style: GoogleFonts.poppins(
-                              fontSize: 16, color: Colors.white),
+                          style: TextStyle(fontSize: 16, color: Colors.white),
                         )
                       ],
                     );

@@ -53,7 +53,7 @@ class EarningsCard extends StatelessWidget {
           left: 10,
           child: Text(
             earnings!.name!,
-            style: GoogleFonts.poppins(
+            style: TextStyle(
               color: Colors.white,
             ),
           ),
@@ -63,7 +63,7 @@ class EarningsCard extends StatelessWidget {
           right: 20,
           child: Text(
             earnings!.increase!.toString(),
-            style: GoogleFonts.poppins(color: Colors.white, fontSize: 20),
+            style: TextStyle(color: Colors.white, fontSize: 20),
           ),
         )
       ],
