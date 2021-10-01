@@ -21,6 +21,10 @@ class WelcomeButton extends StatelessWidget {
     this.myAppStreamObject?.registerDate.setValue(now.toString());
   }
 
+  setPaket(int value){
+    this.myAppStreamObject?.paket.setValue(value);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -43,6 +47,7 @@ class WelcomeButton extends StatelessWidget {
         ),
         onPressed: () async{
           await setRegisterDate();
+          await setPaket(paket!);
           Navigator.of(context)
               .push(MaterialPageRoute(builder: (context) => Home(myAppStreamObject: myAppStreamObject, paket: paket)));
         },

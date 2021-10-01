@@ -19,7 +19,8 @@ class Body extends StatefulWidget {
   final Info? info;
   final Earnings? earnings;
   final MyAppStreamObject? myAppStreamObject;
-  Body({this.myAppStreamObject, this.earnings, this.info});
+  final int? paket;
+  Body({this.myAppStreamObject, this.earnings, this.info, this.paket});
 
   @override
   State<Body> createState() => _BodyState();
@@ -28,7 +29,7 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   late Timer timer;
   late DateTime now;
-  late Duration difference;
+  Duration difference = Duration();
   late DateTime registerDate;
   Map<String, int> parsedData = {};
   Time timeModel = Time();
@@ -48,31 +49,32 @@ class _BodyState extends State<Body> {
 
         // BURASI COMMENTLI KALSIN
 
-        // timer = Timer.periodic(Duration(seconds: 1), (timer) {
-        //   now = DateTime.now();
-        //   difference = now.difference(registerDate);
-        //   //print(difference.toString());
-        //
-        //   setState(() {
-        //     timeModel = Time.fromDuration(difference);
-        //   });
-        // });
+        timer = Timer.periodic(Duration(minutes: 1), (timer) {
+          now = DateTime.now();
+          difference = now.difference(registerDate);
+          //print(difference.toString());
+
+          setState(() {
+            timeModel = Time.fromDuration(difference);
+          });
+        });
 
         return Container(
-          padding: EdgeInsets.all(12),
           color: Colors.white,
           child: Expanded(
             child: GridView.builder(
               physics: NeverScrollableScrollPhysics(),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                mainAxisSpacing: 50,
-                crossAxisSpacing: 20,
+                mainAxisSpacing: 0,
+                crossAxisSpacing: 0,
                 crossAxisCount: 2,
                 childAspectRatio: 1.5,
               ),
               itemCount: earnings.length,
               itemBuilder: (BuildContext context, int index) => EarningsCard(
                 earnings: earnings[index],
+                duration: difference,
+                paket: widget.paket!,
               ),
             ),
           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quit_smoking_app/home/home.dart';
 
 import 'package:quit_smoking_app/welcome/welcome.dart';
 
@@ -30,7 +31,20 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Poppins',
         primarySwatch: Colors.blue,
       ),
-      home: WelcomePage(myAppStreamObject: myAppStreamObject),
+      home: PreferenceBuilder(
+        preference: myAppStreamObject!.registerDate,
+        builder: (context, String value) {
+          if(value == null || value == ""){
+            return WelcomePage(myAppStreamObject: myAppStreamObject);
+          }
+          else{
+            return Home(myAppStreamObject: myAppStreamObject, paket: myAppStreamObject!.paket.getValue());
+          }
+        },
+      ),
+
+
+     //
     );
   }
 }

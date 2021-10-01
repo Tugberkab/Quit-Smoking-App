@@ -4,15 +4,17 @@ import 'package:quit_smoking_app/models/earnings.dart';
 import 'package:quit_smoking_app/models/time.dart';
 
 class EarningsCard extends StatelessWidget {
-  final Time? time;
+  final Duration? duration;
   final Earnings? earnings;
-  const EarningsCard({Key? key, this.earnings, this.time}) : super(key: key);
+  final int? paket;
+  EarningsCard({Key? key, this.earnings, this.duration, this.paket}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Container(
+          margin: EdgeInsets.all(12),
           clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30),
@@ -36,7 +38,7 @@ class EarningsCard extends StatelessWidget {
                     BoxShadow(
                       offset: Offset(1, -2),
                       color: Colors.black,
-                      blurRadius: 2,
+                      blurRadius: 10,
                     )
                   ],
                   color: Colors.black,
@@ -48,8 +50,8 @@ class EarningsCard extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: 50,
-          left: 10,
+          top: 60,
+          left: 20,
           child: Text(
             earnings!.name!,
             style: TextStyle(
@@ -58,13 +60,18 @@ class EarningsCard extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: 30,
-          right: 20,
+          top: 40,
+          right: 30,
           child: Text(
-            earnings!.increase!.toString(),
+            (earnings!.increase! * duration!.inDays * paket!).toString(),
             style: TextStyle(color: Colors.white, fontSize: 20),
           ),
-        )
+        ),
+        Positioned(
+          top: 70,
+          right: 30,
+          child: Text( earnings!.text_right!, textAlign: TextAlign.end, style: TextStyle(color: Colors.white),),
+        ),
       ],
     );
   }

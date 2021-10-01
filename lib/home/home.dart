@@ -120,7 +120,7 @@ class _HomeState extends State<Home> {
               grabbingContentOffset: GrabbingContentOffset.bottom,
             ),
           ],
-          child: Body(myAppStreamObject: widget.myAppStreamObject),
+          child: Body(myAppStreamObject: widget.myAppStreamObject, paket: widget.paket!),
         ),
 
         //Body(myAppStreamObject: widget.myAppStreamObject),
@@ -218,7 +218,7 @@ class _HomeState extends State<Home> {
                     // BURASI COMMENTLI KALSIN
                     registerDate = DateTime.parse(value);
 
-                    timer = Timer.periodic(Duration(minutes: 1), (timer) {
+                    timer = Timer.periodic(Duration(seconds: 1), (timer) {
                       now = DateTime.now();
                       difference = now.difference(registerDate);
                       //print(difference.toString());
@@ -276,7 +276,7 @@ class _HomeState extends State<Home> {
                               ),
                               child: Center(
                                 child: Text(
-                                    "00",
+                                    timeModel.seconds.toString(),
                                     style: TextStyle(
                                     color: Colors.black, fontSize: 20)
                                 ),
@@ -303,7 +303,7 @@ class _HomeState extends State<Home> {
                         //   ],
                         // ),
                         SizedBox(height: 15),
-                        Text("Başlangıç: " + registerDate.toString(), style: TextStyle(fontSize: 16,color: Colors.white),)
+                        Text("Başlangıç: " + registerDate.toString().substring(0,registerDate.toString().lastIndexOf(":")), style: TextStyle(fontSize: 16,color: Colors.white),)
                       ],
                     );
                   },

@@ -41,15 +41,14 @@ class InfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Color(0xffffedf8),
         borderRadius: BorderRadius.circular(20),
       ),
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(info!.text!),
-          SizedBox(height: MediaQuery.of(context).size.height / 40),
+          SizedBox(height: MediaQuery.of(context).size.height / 200),
           LinearPercentIndicator(
             progressColor: secondaryColor,
             animationDuration: 2000,
