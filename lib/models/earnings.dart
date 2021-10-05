@@ -22,7 +22,7 @@ List<Earnings> earnings = [
     id: 2,
     name: 'Akciğer\nYenilenmesi',
     increase: 1/(15*365),
-    text_right: "Yüzde"
+    text_right: "%"
   ),
   Earnings(
     id: 3,

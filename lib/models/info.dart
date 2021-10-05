@@ -29,19 +29,19 @@ List<Info> info = [
   ),
   Info(
     id: 3,
-    text: 'Akciğer Fonksiyonlarında Artma',
+    text: 'Akciğer Fonksiyonlarının Yenilenmesi',
     timeType: "Month",
-    coefficient: 9*20
+    coefficient: 9
   ),
   Info(
     id: 4,
-    text: 'Kalp Krizi Riskinde Azalma',
+    text: 'Kalp Krizi Riskinin Sıfırlanması',
     timeType: "Day",
     coefficient: 2*365
   ),
   Info(
     id: 5,
-    text: 'KOAH Riskinde Azalma',
+    text: 'KOAH Riskinin Sıfırlanması',
     timeType: "Month",
     coefficient: 5*12*2
   ),

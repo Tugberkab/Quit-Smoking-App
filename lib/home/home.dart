@@ -8,6 +8,7 @@ import "package:quit_smoking_app/MyAppStreamObject.dart";
 import 'package:quit_smoking_app/home/widget/info_card.dart';
 import 'package:quit_smoking_app/home/widget/time_card.dart';
 import 'package:quit_smoking_app/models/info.dart';
+import 'package:quit_smoking_app/welcome/welcome.dart';
 import 'package:snapping_sheet/snapping_sheet.dart';
 import 'package:quit_smoking_app/models/time.dart';
 import 'package:streaming_shared_preferences/streaming_shared_preferences.dart';
@@ -92,7 +93,7 @@ class _HomeState extends State<Home> {
                   itemBuilder: (BuildContext context, int index) => Padding(
                     padding: const EdgeInsets.all(5),
                     child: InfoCard(
-                      duration: difference,
+                      difference: difference,
                       info: info[index],
                       coefficient: info[index].coefficient,
                     ),
@@ -158,7 +159,7 @@ class _HomeState extends State<Home> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Text(
-                    "RESET DATE?",
+                    "VERİLERİ SIFIRLA?",
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 22,
@@ -169,17 +170,18 @@ class _HomeState extends State<Home> {
                   ),
                   TextButton(
                     onPressed: (){
-                      resetDate();
-                      Navigator.pop(context);
+                      Navigator.pushReplacementNamed(context, WelcomePage(myAppStreamObject: myAppStreamObject);
+                      // resetDate();
+                      // Navigator.pop(context);
                     },
-                    child: Text("Reset",style: TextStyle(color:Colors.red[700],fontSize: 18),textAlign: TextAlign.center,)
+                    child: Text("Evet",style: TextStyle(color:Colors.red[700],fontSize: 18),textAlign: TextAlign.center,)
                   ),
                   SizedBox(height: 12,),
                   TextButton(
                     onPressed: (){
                       Navigator.pop(context);
                     },
-                    child: Text("Cancel",style: TextStyle(color:Colors.black,fontSize: 18),textAlign: TextAlign.center,)
+                    child: Text("Hayır",style: TextStyle(color:Colors.black,fontSize: 18),textAlign: TextAlign.center,)
                   ),
                 ],
               ),
@@ -218,7 +220,7 @@ class _HomeState extends State<Home> {
                     // BURASI COMMENTLI KALSIN
                     registerDate = DateTime.parse(value);
 
-                    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+                    timer = Timer.periodic(Duration(minutes: 1), (timer) {
                       now = DateTime.now();
                       difference = now.difference(registerDate);
                       //print(difference.toString());
@@ -241,15 +243,6 @@ class _HomeState extends State<Home> {
                           "SİGARASIZ GEÇEN",
                           style: TextStyle(color: Colors.white, fontSize: 25),
                         ),
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.center,
-                        //   children: [
-                        //     Text("${timeModel.days}", style: TextStyle(fontSize: 55, color: Colors.white),),
-                        //     SizedBox(width: 15,),
-                        //     Text("GÜN", style: TextStyle(fontSize: 30, color: Colors.white),)
-                        //   ],
-                        // ),
-
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
@@ -310,7 +303,7 @@ class _HomeState extends State<Home> {
                 ),
               ),
 
-              buildIconButton(),
+              buildResetButton(),
             ],
           ),
         ),
@@ -318,7 +311,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Container buildIconButton() {
+  Container buildResetButton() {
     return Container(
       height: MediaQuery.of(context).size.width / 8,
       width: MediaQuery.of(context).size.width / 8,

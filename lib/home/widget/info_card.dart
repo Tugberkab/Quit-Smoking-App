@@ -5,36 +5,52 @@ import 'package:percent_indicator/percent_indicator.dart';
 
 class InfoCard extends StatelessWidget {
   final Info? info;
-  final Duration? duration;
+  final Duration? difference;
   final double? coefficient;
-  const InfoCard({Key? key, this.info, this.duration, this.coefficient}) : super(key: key);
+  const InfoCard({Key? key, this.info, this.difference, this.coefficient}) : super(key: key);
 
 
   get percentageValue{
-    return 0.0;
-    // if( (duration!./coefficient!) < 0.001 ){
-    //   return 0.0;
-    // }
-    // else if((timeModel!.minutes/coefficient!) >= 1.0){
-    //   return 1.0;
-    // }
-    // else{
-    //   return timeModel!.minutes/coefficient!;
-    // }
+    late double division;
+    if(info!.timeType == "Hour"){
+      division = difference!.inHours/coefficient!;
+    }
+    else if(info!.timeType == "Day"){
+      division = difference!.inDays/coefficient!;
+    }
+    else if(info!.timeType == "Month"){
+      division = (difference!.inDays/30)/coefficient!;
+    }
+    if(division >= 1)
+      return 1.0;
+    return division;
   }
 
   get percentageText{
     late double division;
+    String text = "";
     if(info!.timeType == "Hour"){
-      division = duration!.inHours/coefficient!;
+      division = difference!.inHours/coefficient!;
     }
     else if(info!.timeType == "Day"){
-      division = duration!.inDays/coefficient!;
+      division = difference!.inDays/coefficient!;
     }
     else if(info!.timeType == "Month"){
-      division = (duration!.inDays/30)/coefficient!;
+      division = (difference!.inDays/30)/coefficient!;
     }
-    return Text(division.toStringAsFixed(7));
+
+
+    if(division >= 1.0){
+      division = 1.0;
+    }
+    else if(division == 0.0){
+      return Text("0" + " %");
+    }
+    else{
+      return Text((division*100).toStringAsFixed(4) + " %");
+    }
+
+    return Text("100" + " %");
   }
 
   @override

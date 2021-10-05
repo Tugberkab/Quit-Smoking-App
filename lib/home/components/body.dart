@@ -45,6 +45,7 @@ class _BodyState extends State<Body> {
     return PreferenceBuilder(
       preference: widget.myAppStreamObject!.registerDate,
       builder: (context, String value) {
+
         registerDate = DateTime.parse(value);
 
         // BURASI COMMENTLI KALSIN
@@ -61,21 +62,19 @@ class _BodyState extends State<Body> {
 
         return Container(
           color: Colors.white,
-          child: Expanded(
-            child: GridView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                mainAxisSpacing: 0,
-                crossAxisSpacing: 0,
-                crossAxisCount: 2,
-                childAspectRatio: 1.5,
-              ),
-              itemCount: earnings.length,
-              itemBuilder: (BuildContext context, int index) => EarningsCard(
-                earnings: earnings[index],
-                duration: difference,
-                paket: widget.paket!,
-              ),
+          child: GridView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              mainAxisSpacing: 0,
+              crossAxisSpacing: 0,
+              crossAxisCount: 2,
+              childAspectRatio: 1.5,
+            ),
+            itemCount: earnings.length,
+            itemBuilder: (BuildContext context, int index) => EarningsCard(
+              earnings: earnings[index],
+              duration: difference,
+              paket: widget.paket!,
             ),
           ),
         );

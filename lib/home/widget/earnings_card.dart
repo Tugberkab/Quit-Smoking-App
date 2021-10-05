@@ -9,6 +9,17 @@ class EarningsCard extends StatelessWidget {
   final int? paket;
   EarningsCard({Key? key, this.earnings, this.duration, this.paket}) : super(key: key);
 
+
+  get getValue{
+    if(this.earnings!.id! == 2){
+      return (earnings!.increase! * duration!.inDays * paket!).toStringAsFixed(4);
+    }
+    if((earnings!.increase! * duration!.inDays * paket!) >= 0.5 || (earnings!.increase! * duration!.inDays * paket!) == 0.0){
+      return (earnings!.increase! * duration!.inDays * paket!).toInt().toString();
+    }
+    return (earnings!.increase! * duration!.inDays * paket!).toStringAsFixed(4);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -63,14 +74,14 @@ class EarningsCard extends StatelessWidget {
           top: 40,
           right: 30,
           child: Text(
-            (earnings!.increase! * duration!.inDays * paket!).toString(),
+            getValue,
             style: TextStyle(color: Colors.white, fontSize: 20),
           ),
         ),
         Positioned(
           top: 70,
           right: 30,
-          child: Text( earnings!.text_right!, textAlign: TextAlign.end, style: TextStyle(color: Colors.white),),
+          child: Text( earnings!.text_right!, textAlign: TextAlign.end, style: TextStyle(color: Colors.white, fontSize:earnings!.text_right! == "%" ? 20 : 16 ),),
         ),
       ],
     );
