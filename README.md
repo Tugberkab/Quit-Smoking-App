@@ -6,7 +6,7 @@ Users will track how much time have been since their decision of quitting smoke 
 
 
 
-###### About The App
+#### About The App
 
 Before beginning, user must pick the number of cigarette box that he/she consumes per day. 
 
@@ -16,7 +16,7 @@ Timer starts counting at that moment unless user resets registerDate (if he/she 
 
 
 
-###### Screenshots
+#### Screenshots
 
 <img src="https://user-images.githubusercontent.com/68128434/136836283-2139d63c-d8ce-4b03-8b96-5b757e2dbd25.png" alt="Screenshot_1633955802" width="300" height="600" />
 
