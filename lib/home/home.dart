@@ -15,8 +15,7 @@ import 'package:streaming_shared_preferences/streaming_shared_preferences.dart';
 
 class Home extends StatefulWidget {
   final MyAppStreamObject? myAppStreamObject;
-  final int? paket;
-  Home({this.myAppStreamObject, this.paket});
+  Home({this.myAppStreamObject});
 
   @override
   State<Home> createState() => _HomeState();
@@ -121,7 +120,7 @@ class _HomeState extends State<Home> {
               grabbingContentOffset: GrabbingContentOffset.bottom,
             ),
           ],
-          child: Body(myAppStreamObject: widget.myAppStreamObject, paket: widget.paket!),
+          child: Body(myAppStreamObject: widget.myAppStreamObject!, difference: difference,),
         ),
 
         //Body(myAppStreamObject: widget.myAppStreamObject),
@@ -169,10 +168,10 @@ class _HomeState extends State<Home> {
                     height: 15,
                   ),
                   TextButton(
-                    onPressed: (){
-                      Navigator.pushReplacementNamed(context, WelcomePage(myAppStreamObject: myAppStreamObject);
-                      // resetDate();
-                      // Navigator.pop(context);
+                    onPressed: ()async {
+                      timer.cancel();
+                      await resetPreferences();
+                      Navigator.pop(context);
                     },
                     child: Text("Evet",style: TextStyle(color:Colors.red[700],fontSize: 18),textAlign: TextAlign.center,)
                   ),
@@ -192,8 +191,12 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Future<void> resetDate() async {
-    widget.myAppStreamObject!.registerDate.setValue(DateTime.now().toString());
+  Future<void> resetPreferences() async {
+    await widget.myAppStreamObject!.registerDate.setValue("");
+    await widget.myAppStreamObject!.paket.setValue(1);
+
+    print(widget.myAppStreamObject!.registerDate.getValue());
+    print(widget.myAppStreamObject!.paket.getValue());
   }
 
   AppBar buildCustomAppBar(
@@ -214,21 +217,25 @@ class _HomeState extends State<Home> {
               SafeArea(
                 child: PreferenceBuilder(
                   preference: myAppStreamObject!.registerDate,
-                  builder: (context, String value) {
+                  builder: (context, String value){
+                    if(value == "" || value == null){
+                      return Container(color: Colors.blue,);
+                    }
+                    else{
 
+                      // BURASI COMMENTLI KALSIN
+                      registerDate = DateTime.parse(value);
 
-                    // BURASI COMMENTLI KALSIN
-                    registerDate = DateTime.parse(value);
+                      timer = Timer.periodic(Duration(seconds: 1), (timer) {
+                        if(registerDate == "" || registerDate == null) timer.cancel();
+                        now = DateTime.now();
+                        difference = now.difference(registerDate);
+                        //print(difference.toString());
 
-                    timer = Timer.periodic(Duration(minutes: 1), (timer) {
-                      now = DateTime.now();
-                      difference = now.difference(registerDate);
-                      //print(difference.toString());
-
-                      setState(() {
-                        timeModel = Time.fromDuration(difference);
+                        setState(() {
+                          timeModel = Time.fromDuration(difference);
+                        });
                       });
-                    });
 
 
 
@@ -236,69 +243,71 @@ class _HomeState extends State<Home> {
 
 
 
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "SİGARASIZ GEÇEN",
-                          style: TextStyle(color: Colors.white, fontSize: 25),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            TimeCard("Yıl", timeModel.years),
-                            TimeCard("Ay", timeModel.months),
-                            TimeCard("Gün", timeModel.days),
-                            TimeCard("Saat", timeModel.hours),
-                            TimeCard("Dakika", timeModel.minutes),
-                            Container(
-                              width: 40,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                shape: BoxShape.circle,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.3),
-                                    spreadRadius: 5,
-                                    blurRadius: 7,
-                                    offset: Offset(
-                                        0, 3), // changes position of shadow
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "SİGARASIZ GEÇEN",
+                            style: TextStyle(color: Colors.white, fontSize: 25),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              TimeCard("Yıl", timeModel.years),
+                              TimeCard("Ay", timeModel.months),
+                              TimeCard("Gün", timeModel.days),
+                              TimeCard("Saat", timeModel.hours),
+                              TimeCard("Dakika", timeModel.minutes),
+                              Container(
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  shape: BoxShape.circle,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.3),
+                                      spreadRadius: 5,
+                                      blurRadius: 7,
+                                      offset: Offset(
+                                          0, 3), // changes position of shadow
+                                    ),
+                                  ],
+                                ),
+                                child: Center(
+                                  child: Text(
+                                      timeModel.seconds.toString(),
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 20)
                                   ),
-                                ],
-                              ),
-                              child: Center(
-                                child: Text(
-                                    timeModel.seconds.toString(),
-                                    style: TextStyle(
-                                    color: Colors.black, fontSize: 20)
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.center,
-                        //   children: [
-                        //     Text("${timeModel.years} YEARS"),
-                        //     Text("${timeModel.months} MONTHS"),
-                        //     Text("${timeModel.weeks} WEEKS"),
-                        //   ],
-                        // ),
-                        // SizedBox(height: 20,),
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.center,
-                        //   children: [
-                        //     Text("${timeModel.days} DAYS"),
-                        //     Text("${timeModel.hours} HOURS"),
-                        //     Text("${timeModel.minutes} MINUTES"),
-                        //     Text("${timeModel.seconds} SECONDS"),
-                        //   ],
-                        // ),
-                        SizedBox(height: 15),
-                        Text("Başlangıç: " + registerDate.toString().substring(0,registerDate.toString().lastIndexOf(":")), style: TextStyle(fontSize: 16,color: Colors.white),)
-                      ],
-                    );
+                            ],
+                          ),
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.center,
+                          //   children: [
+                          //     Text("${timeModel.years} YEARS"),
+                          //     Text("${timeModel.months} MONTHS"),
+                          //     Text("${timeModel.weeks} WEEKS"),
+                          //   ],
+                          // ),
+                          // SizedBox(height: 20,),
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.center,
+                          //   children: [
+                          //     Text("${timeModel.days} DAYS"),
+                          //     Text("${timeModel.hours} HOURS"),
+                          //     Text("${timeModel.minutes} MINUTES"),
+                          //     Text("${timeModel.seconds} SECONDS"),
+                          //   ],
+                          // ),
+                          SizedBox(height: 15),
+                          Text("Başlangıç: " + registerDate.toString().substring(0,registerDate.toString().lastIndexOf(":")), style: TextStyle(fontSize: 16,color: Colors.white),)
+                        ],
+                      );
+                    }
+
                   },
                 ),
               ),
@@ -340,5 +349,12 @@ class _HomeState extends State<Home> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    timer.cancel();
+    super.dispose();
   }
 }

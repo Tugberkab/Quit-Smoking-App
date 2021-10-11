@@ -18,11 +18,11 @@ class WelcomeButton extends StatelessWidget {
 
   setRegisterDate()async{
     DateTime now = DateTime.now();
-    this.myAppStreamObject?.registerDate.setValue(now.toString());
+    await this.myAppStreamObject?.registerDate.setValue(now.toString());
   }
 
-  setPaket(int value){
-    this.myAppStreamObject?.paket.setValue(value);
+  setPaket(int value) async{
+    await this.myAppStreamObject?.paket.setValue(value);
   }
 
   @override
@@ -48,8 +48,8 @@ class WelcomeButton extends StatelessWidget {
         onPressed: () async{
           await setRegisterDate();
           await setPaket(paket!);
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => Home(myAppStreamObject: myAppStreamObject, paket: paket)));
+          // Navigator.of(context)
+          //     .push(MaterialPageRoute(builder: (context) => Home(myAppStreamObject: myAppStreamObject!)));
         },
         child: Text(
           'hadi başlayalım!'.toUpperCase(),

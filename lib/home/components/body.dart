@@ -16,24 +16,15 @@ import "package:quit_smoking_app/MyAppStreamObject.dart";
 import 'package:streaming_shared_preferences/streaming_shared_preferences.dart';
 
 class Body extends StatefulWidget {
-  final Info? info;
-  final Earnings? earnings;
   final MyAppStreamObject? myAppStreamObject;
-  final int? paket;
-  Body({this.myAppStreamObject, this.earnings, this.info, this.paket});
+  final Duration? difference;
+  Body({this.myAppStreamObject, this.difference});
 
   @override
   State<Body> createState() => _BodyState();
 }
 
 class _BodyState extends State<Body> {
-  late Timer timer;
-  late DateTime now;
-  Duration difference = Duration();
-  late DateTime registerDate;
-  Map<String, int> parsedData = {};
-  Time timeModel = Time();
-
   // Future<DateTime> getRegisterDate()async{
   //   SharedPreferences prefs = await SharedPreferences.getInstance();
   //   DateTime registerDate = DateTime.parse(prefs.getString("registerDate").toString());
@@ -45,39 +36,29 @@ class _BodyState extends State<Body> {
     return PreferenceBuilder(
       preference: widget.myAppStreamObject!.registerDate,
       builder: (context, String value) {
-
-        registerDate = DateTime.parse(value);
-
-        // BURASI COMMENTLI KALSIN
-
-        timer = Timer.periodic(Duration(minutes: 1), (timer) {
-          now = DateTime.now();
-          difference = now.difference(registerDate);
-          //print(difference.toString());
-
-          setState(() {
-            timeModel = Time.fromDuration(difference);
-          });
-        });
-
-        return Container(
-          color: Colors.white,
-          child: GridView.builder(
-            physics: NeverScrollableScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              mainAxisSpacing: 0,
-              crossAxisSpacing: 0,
-              crossAxisCount: 2,
-              childAspectRatio: 1.5,
+        if(value == "" || value==null){
+          return Container(color: Colors.red,);
+        }
+        else{
+          return Container(
+            color: Colors.white,
+            child: GridView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                mainAxisSpacing: 0,
+                crossAxisSpacing: 0,
+                crossAxisCount: 2,
+                childAspectRatio: 1.5,
+              ),
+              itemCount: earnings.length,
+              itemBuilder: (BuildContext context, int index) => EarningsCard(
+                earnings: earnings[index],
+                duration: widget.difference!,
+                paket: widget.myAppStreamObject!.paket.getValue(),
+              ),
             ),
-            itemCount: earnings.length,
-            itemBuilder: (BuildContext context, int index) => EarningsCard(
-              earnings: earnings[index],
-              duration: difference,
-              paket: widget.paket!,
-            ),
-          ),
-        );
+          );
+        }
       },
     );
   }

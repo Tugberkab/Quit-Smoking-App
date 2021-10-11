@@ -35,10 +35,10 @@ class MyApp extends StatelessWidget {
         preference: myAppStreamObject!.registerDate,
         builder: (context, String value) {
           if(value == null || value == ""){
-            return WelcomePage(myAppStreamObject: myAppStreamObject);
+            return WelcomePage(myAppStreamObject: myAppStreamObject!);
           }
           else{
-            return Home(myAppStreamObject: myAppStreamObject, paket: myAppStreamObject!.paket.getValue());
+            return Home(myAppStreamObject: myAppStreamObject!);
           }
         },
       ),

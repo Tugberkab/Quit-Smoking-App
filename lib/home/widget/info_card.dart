@@ -47,10 +47,10 @@ class InfoCard extends StatelessWidget {
       return Text("0" + " %");
     }
     else{
-      return Text((division*100).toStringAsFixed(4) + " %");
+      return Text((division*100).toStringAsFixed(4) + " %", style: TextStyle(color: division>=0.6 ? Colors.white: Colors.black));
     }
 
-    return Text("100" + " %");
+    return Text("100" + " %", style: TextStyle(color: division>=0.6 ? Colors.white: Colors.black),);
   }
 
   @override
